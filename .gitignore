@@ -1,1 +1,3 @@
-#nope
+#ignored file types
+*.docx
+*.pdf
