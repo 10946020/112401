@@ -21,7 +21,7 @@ byte rowPins[ROWS] = {10, 9, 8, 7}; //connect to the row pinouts of the keypad
 byte colPins[COLS] = {6, 5, 4}; //connect to the column pinouts of the keypad
 //Create an object of keypad
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS); //啟用keypad物件
-String password = "1145141919810"; //按鈕的固定密碼, 可在這個程式檔案內更改
+String password = "112401"; //按鈕的固定密碼, 可在這個程式檔案內更改
 int pwDigit; //目前已輸入密碼的位元數
 String userEnter; //記錄使用者輸入的密碼
 
@@ -115,11 +115,25 @@ void loop(){ //重複執行的動作
     Serial.println("Match");
 
     //可以設定感測到哪個指紋時要顯示出什麼訊息
-    if(finger.fingerID == 1){
-      Serial.println("Welcome back, Zir!");
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Hello, Zir!"); //指紋可以特定身分, 可以直接顯示名字
+    switch(finger.fingerID){
+        case 1:
+          Serial.println("Welcome back, User01!");
+          lcd.clear();
+          lcd.setCursor(0, 0);
+          lcd.print("Hello, User01!"); //指紋可以特定身分, 可以直接顯示名字
+          break;
+        case 2:
+          Serial.println("Welcome back, User02!");
+          lcd.clear();
+          lcd.setCursor(0, 0);
+          lcd.print("Hello, User02!");
+          break;
+        case 3:
+          Serial.println("Welcome back, User03!");
+          lcd.clear();
+          lcd.setCursor(0, 0);
+          lcd.print("Hello, User03!");
+          break;          
     }
 
     pwDigit = 0;
