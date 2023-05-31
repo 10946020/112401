@@ -53,7 +53,7 @@ void setup(){ //開始時執行一次, 主要為偵測
   Serial.println("Waiting for valid finger or to enter the password...");
 
   //---LCD---
-  //SDA-A4; SCL-A5
+  //SDA接A4; SCL接A5
   //初始化LCD 
   lcd.init(); 
   lcd.backlight(); //開啟背光
@@ -72,9 +72,18 @@ void loop(){ //重複執行的動作
       lcd.clear();
     }
 
+    //基本安全設定
+    if(pwDigit >= 1){ //輸入至少1碼後再有新的輸入的時候
+      for(int i = 0; i < pwDigit; i++){
+        //從最左上角開始把前面輸入的密碼都換成*, 避免旁邊的人看到
+        lcd.setCursor(i, 0);
+        lcd.print("*");
+      }
+    }
+
     //從最左上方開始往右顯示按下的按鈕
     lcd.setCursor(pwDigit, 0);
-    Serial.print(key); //IDE視窗
+    Serial.print("*"); //IDE視窗
     userEnter += key;
     pwDigit ++;
     lcd.print(key); //LCD
