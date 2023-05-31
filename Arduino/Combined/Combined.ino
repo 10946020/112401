@@ -1,7 +1,6 @@
 #include <Adafruit_Fingerprint.h>
 #include <Keypad.h>
-#include <LiquidCrystal_I2C.h> 
-#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
 
 //---Sensor---
 volatile int finger_status = -1;
