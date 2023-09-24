@@ -33,23 +33,32 @@
         android:id="@+id/daytime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="114dp"
-        android:text="."
+        android:layout_marginTop="40dp"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Button
-        android:id="@+id/checkButton"
+    <TextView
+        android:id="@+id/last_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#03A9F4"
-        android:text="Check!"
+        android:layout_marginTop="40dp"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/daytime"
         app:layout_constraintStart_toStartOf="@+id/daytime"
         app:layout_constraintTop_toBottomOf="@+id/daytime" />
+
+    <Button
+        android:id="@+id/checkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#03A9F4"
+        android:text="Check!"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/last_check"
+        app:layout_constraintStart_toStartOf="@+id/last_check"
+        app:layout_constraintTop_toBottomOf="@+id/last_check" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
