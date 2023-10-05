@@ -1,5 +1,6 @@
 package com.example.project112401
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -15,6 +16,9 @@ class MainActivity : AppCompatActivity() {
         val button1 = findViewById<Button>(R.id.checkButton)  //暫時用來表示偵測身分的按鈕, 以後會用自動辨識功能來取代
         val time = findViewById<TextView>(R.id.daytime)  //這個TextView用來顯示 : 發生偵測動作當下的時間
         val calculator = findViewById<TextView>(R.id.last_check)  //這個TextView用來顯示 : 兩次偵測之間的時間差
+        val launchBtn = findViewById<Button>(R.id.launchBtn)
+
+        val intent1 = Intent(this, SecActivity::class.java)
 
         var lastTime : Long = 0  //暫放上次偵測時間資料的變數
 
@@ -55,6 +59,10 @@ class MainActivity : AppCompatActivity() {
                 //當前時間 - 上次時間 = 經過了幾毫秒, 之後用自行寫的function來整理
             }
             lastTime = now  //把當下時間放到暫存用的變數裡
+        }
+
+        launchBtn.setOnClickListener{
+            startActivity(intent1)
         }
     }
 }
