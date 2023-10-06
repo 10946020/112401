@@ -9,6 +9,9 @@ import java.sql.Timestamp
 import java.text.SimpleDateFormat
 
 class MainActivity : AppCompatActivity() {
+
+    private var lastTime : Long = 0  //暫放上次偵測時間資料的變數
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -16,11 +19,7 @@ class MainActivity : AppCompatActivity() {
         val button1 = findViewById<Button>(R.id.checkButton)  //暫時用來表示偵測身分的按鈕, 以後會用自動辨識功能來取代
         val time = findViewById<TextView>(R.id.daytime)  //這個TextView用來顯示 : 發生偵測動作當下的時間
         val calculator = findViewById<TextView>(R.id.last_check)  //這個TextView用來顯示 : 兩次偵測之間的時間差
-        val launchBtn = findViewById<Button>(R.id.launchBtn)
-
-        val intent1 = Intent(this, SecActivity::class.java)
-
-        var lastTime : Long = 0  //暫放上次偵測時間資料的變數
+        val launchBtn = findViewById<Button>(R.id.launchBtn)  //切換介面用的按鈕物件
 
         //自行寫的function, 用來把毫秒為單位的資料轉成直觀的時間
         fun datetimeExchanger (timeData : Long) : String{  //x : 以ms為單位的時間
@@ -61,8 +60,26 @@ class MainActivity : AppCompatActivity() {
             lastTime = now  //把當下時間放到暫存用的變數裡
         }
 
-        launchBtn.setOnClickListener{
-            startActivity(intent1)
+        launchBtn.setOnClickListener{  //按下切換介面的按鈕後
+            //切換至SecActivity的intent
+            val intent1 = Intent(this, SecActivity::class.java).apply {
+                this.putExtra("LastTime", lastTime.toString())  //把時間資料型態從Long轉成String
+            }
+            //發送request code, 不同的數字代表不同的下指令對象, 用來等回傳資料時判別身分
+            startActivityForResult(intent1, 114)
+        }
+    }
+
+    //判別回傳的requestCode
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val v = findViewById<TextView>(R.id.returnValue)  //用來顯示上次保存的時間的物件
+        if (requestCode == 114){  //回傳的code號碼
+            if (resultCode == RESULT_OK){  //狀態為回傳成功的話
+                //變數設定為跳轉頁面時保存的時間, 變數後加上?表示可以為空值, 加上!!則表示絕不是空值並繼續執行
+                lastTime = data?.getStringExtra("LastTime_fromSec")!!.toLong()
+                v.text = lastTime.toString()  //顯示保存的時間
+            }
         }
     }
 }
