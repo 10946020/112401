@@ -317,9 +317,34 @@ uint8_t getFingerprintID() {
 }
 
 uint8_t getFingerprintEnroll() {
+  
   int p;
   Serial.print("Waiting for valid finger to enroll as #"); Serial.println(id);
   while (p != FINGERPRINT_OK) {
+    char keyEnroll = keypad.getKey();
+    if(keyEnroll){
+      if(keyEnroll == '*'){
+        //如果還沒註冊指紋時按下*鍵, 就退出註冊模式
+        //(註冊時發現錯誤時先多按一下*, 等到重新等待指紋時再多按一下以退出)
+        Serial.println("Ended the enroll mode.");
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("ENROLL mode");
+        lcd.setCursor(0, 1);
+        lcd.print("has ended.");
+        enrollMode = false;
+        //重置狀態
+        pwDigit = 0;
+        userEnter = "";
+        delay(3000);
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Waiting...");
+        Serial.print("Please enter the password or fingerprint : ");
+        return;
+        break;
+      }
+    }
     p = finger.getImage();
 
     switch (p) {
