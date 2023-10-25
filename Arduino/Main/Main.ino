@@ -114,7 +114,7 @@ void loop(){ //重複執行的動作
       }
       else{
         lcd.print(key);
-        Serial.println(key);
+        Serial.print(key);
         userEnter += key;
         pwDigit ++;
       }
@@ -169,7 +169,7 @@ void loop(){ //重複執行的動作
         Serial.print("*"); //IDE視窗
         userEnter += key;
 
-        if(userEnter == "#114514"){  //進入註冊模式
+        if(userEnter == "111111"){  //進入註冊模式
           //初始化LCD跟Key pad密碼相關的變數等
           pwDigit = 0;
           userEnter = "";
@@ -192,7 +192,7 @@ void loop(){ //重複執行的動作
           return;
         }
 
-        //else if(userEnter == "#228922"){}  //進入刪除身分模式
+        //else if(userEnter == "222222"){}  //進入刪除身分模式
         else if(pwDigit == password.length()){ //當輸入的密碼位數跟預設密碼的位數一樣時
             //不管正確與否都要清空,並準備顯示其他訊息
             lcd.clear();
