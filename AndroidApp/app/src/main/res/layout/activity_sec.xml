@@ -14,7 +14,6 @@
         android:backgroundTint="#2196F3"
         android:text="Back"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -23,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="114514"
+        android:text="1"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/returnBtn1"
         app:layout_constraintStart_toStartOf="@+id/returnBtn1"
@@ -38,4 +37,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/connectBtn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Connect"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/data1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="0"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/connectBtn1"
+        app:layout_constraintStart_toStartOf="@+id/connectBtn1"
+        app:layout_constraintTop_toBottomOf="@+id/connectBtn1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
