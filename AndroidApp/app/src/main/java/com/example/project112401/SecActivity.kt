@@ -21,17 +21,19 @@ class SecActivity : AppCompatActivity() {
             text = intent.getStringExtra("LastTime")  //從主介面傳送來的時間資料
         }
 
-        val connectBtn =  findViewById<Button>(R.id.connectBtn1)  //送出http request用的按鈕
-        val espData = findViewById<TextView>(R.id.data1)  //顯示接收到的訊息
+        val registerBtn =  findViewById<Button>(R.id.button_appUser)  //註冊帳號用的button
+        val loginBtn =  findViewById<Button>(R.id.button_login)  //登入用的button
+        val joinBtn =  findViewById<Button>(R.id.button_joinTheRoom)  //加入房間用的button
 
         returnBtn.setOnClickListener{
             intent2.putExtra("LastTime_fromSec", testTextView.text)  //設定傳送回去的資料
             setResult(RESULT_OK,intent2)  //回傳表示執行成功的結果
-            finish()  //回到主界面
+            startActivity(intent2)  //回到主界面
         }
 
-        connectBtn.setOnClickListener{
-
+        registerBtn.setOnClickListener {
+            val intentToRegister = Intent(this, AppUserRegister::class.java)
+            startActivity(intentToRegister)
         }
     }
 }
