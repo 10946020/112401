@@ -24,18 +24,18 @@
         android:id="@+id/test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginBottom="10dp"
         android:text="1"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="@+id/imageView" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="300sp"
         android:layout_height="300sp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:background="#2196F3"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,13 +47,13 @@
         android:id="@+id/button_appUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="#4CAF50"
         android:text="App User Register"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/test"
-        app:layout_constraintStart_toStartOf="@+id/test"
-        app:layout_constraintTop_toBottomOf="@+id/test" />
+        app:layout_constraintEnd_toEndOf="@+id/userInfo"
+        app:layout_constraintStart_toStartOf="@+id/userInfo"
+        app:layout_constraintTop_toBottomOf="@+id/userInfo" />
 
     <Button
         android:id="@+id/button_joinTheRoom"
@@ -75,6 +75,17 @@
         android:layout_marginTop="30dp"
         android:backgroundTint="#E91E63"
         android:text="Login"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/userInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:text="userInfo"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
