@@ -39,11 +39,30 @@ class AppUserRegister : AppCompatActivity() {
 
         //設定按下按鈕後會觸發的動作
         registerBtn.setOnClickListener {
-            val newUser = AppUser(userName.text.toString(),userEmail.text.toString(), userPassword.text.toString())
-            if(newUser.name == ""){
+            //檢查輸入資訊是否正確及適當
+            if(userName.text.toString() == ""){
                 warningMessage.text = "Please Enter your name!"
             }
-            else if(newUser.name != ""){
+            else if(userEmail.text.toString() == ""){
+                warningMessage.text = "Please Enter your E-mail!"
+            }
+            else if(userPassword.text.toString() == ""){
+                warningMessage.text = "Please Enter your Password!"
+            }
+            else if(checkPassword.text.toString() == ""){
+                warningMessage.text = "Please Enter your Password again!"
+            }
+            else if(userPassword.text.toString() != checkPassword.text.toString()){
+                warningMessage.text = "Please Enter the same password twice!"
+            }
+            else if(userPassword.text.toString().length < 6){
+                warningMessage.text = "Your password was too short!"
+            }
+            else if(userPassword.text.toString().length > 16){
+                warningMessage.text = "Your password was too long!"
+            }
+            else{
+                val newUser = AppUser(userName.text.toString(),userEmail.text.toString(), userPassword.text.toString())
                 intent.putExtra("user_Name", newUser.name)
                 setResult(RESULT_OK, intent)
                 finish()

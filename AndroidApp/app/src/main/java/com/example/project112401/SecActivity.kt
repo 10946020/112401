@@ -36,6 +36,11 @@ class SecActivity : AppCompatActivity() {
             val intentToRegister = Intent(this, AppUserRegister::class.java)
             startActivityForResult(intentToRegister, 112401002)
         }
+
+        loginBtn.setOnClickListener {
+            val intentToLogin = Intent(this, LoginList::class.java)
+            startActivityForResult(intentToLogin, 112401003)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -48,6 +53,18 @@ class SecActivity : AppCompatActivity() {
                 }
                 else if(resultCode == RESULT_CANCELED){
                     "Register canceled"
+                }
+                else{
+                    "ERROR"
+                }
+        }
+        else if(requestCode == 112401003){
+            userInfo.text =
+                if(resultCode == RESULT_OK){
+                    "Welcome back, " + data?.getStringExtra("user_Name")
+                }
+                else if(resultCode == RESULT_CANCELED){
+                    "Login canceled"
                 }
                 else{
                     "ERROR"
