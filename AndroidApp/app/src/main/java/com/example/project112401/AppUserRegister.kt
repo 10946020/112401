@@ -37,6 +37,8 @@ class AppUserRegister : AppCompatActivity() {
         val registerBtn =  findViewById<Button>(R.id.button_toRegister)  //註冊按鈕
         val backBtn = findViewById<Button>(R.id.button_back)  //取消按鈕
 
+        val intentBackToSec = Intent(this, SecActivity::class.java)  //註冊結束後一律用這個intent回到SecActivity
+
         //設定按下按鈕後會觸發的動作
         registerBtn.setOnClickListener {
             //檢查輸入資訊是否正確及適當
@@ -63,14 +65,14 @@ class AppUserRegister : AppCompatActivity() {
             }
             else{
                 val newUser = AppUser(userName.text.toString(),userEmail.text.toString(), userPassword.text.toString())
-                intent.putExtra("user_Name", newUser.name)
-                setResult(RESULT_OK, intent)
+                intentBackToSec.putExtra("user_Name", newUser.name)
+                setResult(RESULT_OK, intentBackToSec)
                 finish()
             }
         }
 
         backBtn.setOnClickListener {
-            setResult(RESULT_CANCELED)
+            setResult(RESULT_CANCELED, intentBackToSec)
             finish()
         }
     }
