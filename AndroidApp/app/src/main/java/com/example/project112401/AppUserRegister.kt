@@ -8,13 +8,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 
-private class AppUser(var name : String, var email : String, var password : String){
-    init {
-        this.name = name
-        this.email = email
-        this.password = password
-    }
-}
 class AppUserRegister : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
 
@@ -64,8 +57,9 @@ class AppUserRegister : AppCompatActivity() {
                 warningMessage.text = "Your password was too long!"
             }
             else{
-                val newUser = AppUser(userName.text.toString(),userEmail.text.toString(), userPassword.text.toString())
-                intentBackToSec.putExtra("user_Name", newUser.name)
+                //這邊預定要開發的功能 : 送出使用者的資料到Database
+
+                intentBackToSec.putExtra("user_Name", userName.text.toString())
                 setResult(RESULT_OK, intentBackToSec)
                 finish()
             }

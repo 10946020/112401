@@ -37,4 +37,13 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/userList_back"
+        app:layout_constraintEnd_toStartOf="@+id/userList_register"
+        app:layout_constraintStart_toEndOf="@+id/userList_back"
+        app:layout_constraintTop_toTopOf="@+id/userList_back" />
 </androidx.constraintlayout.widget.ConstraintLayout>
