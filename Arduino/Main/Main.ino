@@ -144,7 +144,6 @@ void loop(){ //重複執行的動作
       lcd.print("Waiting...");
       Serial.print("Please enter the password or fingerprint : ");
     }
-
     else{
       //按下按鈕時
       if(key){

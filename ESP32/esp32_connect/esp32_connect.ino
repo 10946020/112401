@@ -1,12 +1,13 @@
 #include <WiFi.h>
 
-#define RXp2 16
-#define TXp2 17
-#define ledPin 32
+#define RXp2 16  //灰色線, ESP32板上的RX2(GIOP16), 接到Arduino板子上的1號
+#define TXp2 17  //白色線, ESP32板上的TX2(GIOP17), 接到Arduino板子上的0號
+
+#define ledPin 32  //GIOP32, 連至LED
 bool ledStatus = false;  //一開始先讓LED為暗
 
-const char ssid[] = "_"; //自家WiFi網路名稱
-const char pwd[] = "_"; //WiFi密碼
+const char ssid[] = ""; //自家WiFi網路名稱
+const char pwd[] = ""; //WiFi密碼
 
 void Show_Wifi_Status(){  //led腳位顯示當前狀態為true or false
   delay(20);
@@ -24,7 +25,8 @@ void setup() {
   Serial.begin(115200);
 
   //第二個Serial, 顯示從16,17腳位接收到的訊息
-  //Serial2.begin(9600, SERIAL_8N1, RXp2, TXp2);
+  //第一個參數的數值需跟Arduino UNO板的baud值相同
+  Serial2.begin(9600, SERIAL_8N1, RXp2, TXp2);
   
   pinMode(ledPin, OUTPUT);  //設定為輸出腳位
   Show_Wifi_Status();
@@ -46,9 +48,7 @@ void setup() {
   Show_Wifi_Status();
 }
 
-void loop() {
-  //Serial.println(Serial2.readString());
-  //delay(50);  //每50ms檢查一次從RX跟TX傳來的訊息
+void loop() { 
   if(WiFi.status()!=WL_CONNECTED){
     //如果Wifi斷掉連線就讓LED為暗, 然後進入while迴圈直到重新連上Wifi
     ledStatus = false;
@@ -67,4 +67,6 @@ void loop() {
     ledStatus = true;
     Show_Wifi_Status();
   }
+  Serial.println(Serial2.readString());  //這裡的Serial顯示從Serial2讀取到的訊息
+  delay(1000);  //設定每幾ms檢查一次從RX跟TX傳來的訊息
 }
