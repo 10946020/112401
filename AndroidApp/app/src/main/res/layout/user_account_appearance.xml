@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10sp"
+    android:layout_marginTop="10sp"
+    android:layout_marginRight="10sp"
+    android:layout_marginBottom="10sp"
+    android:background="#2196F3"
+    android:backgroundTint="#90D8E1"
+    android:clipToPadding="true">
+
+    <ImageView
+        android:id="@+id/userList_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/userList_userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Name"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/userList_icon"
+        app:layout_constraintStart_toEndOf="@+id/userList_icon"
+        app:layout_constraintTop_toTopOf="@+id/userList_icon"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/userList_userEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:text="Email"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/userList_icon"
+        app:layout_constraintStart_toEndOf="@+id/userList_icon"
+        app:layout_constraintTop_toTopOf="@+id/userList_icon" />
+
+    <ImageView
+        android:id="@+id/userList_delete"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:layout_marginEnd="32dp"
+        android:background="#FF5722"
+        app:layout_constraintBottom_toBottomOf="@+id/userList_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/userList_icon"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+</androidx.constraintlayout.widget.ConstraintLayout>
