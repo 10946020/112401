@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -22,7 +23,7 @@ class LoginList : AppCompatActivity() {
 
         count = findViewById(R.id.data)
         userList = findViewById(R.id.added_userList)  //RecyclerView, 用來顯示Adapter抓來的每筆資料
-        userData.add(NewAddedUser("Zir", "114514", "1919810"))
+        userData.add(NewAddedUser("ItsZir", "10946020@ntub.edu.tw", "1234567890"))
 
         //測試用的假資料
         userName = arrayOf("a","b","c")
@@ -41,8 +42,17 @@ class LoginList : AppCompatActivity() {
         val registerBtn = findViewById<Button>(R.id.userList_register)  //綠色的註冊按鈕
 
         backBtn.setOnClickListener {
-            setResult(RESULT_CANCELED)
-            finish()
+            //判斷全域變數class中已登入的user名稱是否為空
+            if(loggedInUser.getName() != ""){
+                val toast = Toast.makeText(this, "Logged in as " + loggedInUser.getName(), Toast.LENGTH_SHORT)
+                    toast.show()
+                setResult(RESULT_OK)
+                finish()
+            }
+            else if(loggedInUser.getName() == ""){
+                setResult(RESULT_CANCELED)
+                finish()
+            }
         }
 
         registerBtn.setOnClickListener {

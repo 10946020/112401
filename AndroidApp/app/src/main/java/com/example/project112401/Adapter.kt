@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 //Adapter是介於資料跟顯示介面之間溝通的角色
@@ -37,6 +38,10 @@ class Adapter(private val newUserList : ArrayList<NewAddedUser>) : RecyclerView.
                 .setMessage("Login as this user?")
                 .setNegativeButton("Yes"){dialog, which ->
                     //傳送該使用者的名稱回SecActivity
+                    //設定成為已登入的user, loggedInUser為global variable
+                    loggedInUser.setName(holder.userName.text.toString())
+                        //.setEmail(holder.userEmail.text.toString())
+                        //.setPassword(holder.userName.text.toString())
                 }
                 .setNeutralButton("No"){dialog, which -> }
                 .show()

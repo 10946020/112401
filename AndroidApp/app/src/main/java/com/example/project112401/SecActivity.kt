@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 
 class SecActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
+    lateinit var loginBtn : Button  //登入用的button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sec)
@@ -22,8 +25,15 @@ class SecActivity : AppCompatActivity() {
         }
 
         val registerBtn =  findViewById<Button>(R.id.button_appUser)  //註冊帳號用的button
-        val loginBtn =  findViewById<Button>(R.id.button_login)  //登入用的button
+        loginBtn =  findViewById(R.id.button_login)  //登入用的button
+
         val joinBtn =  findViewById<Button>(R.id.button_joinTheRoom)  //加入房間用的button
+
+        val userInfo = findViewById<TextView>(R.id.userInfo)
+        if(loggedInUser.getName() != ""){  //如果有任何人登入, 則顯示目前使用者的名字
+            userInfo.text = "Welcome back, " + loggedInUser.getName()
+            loginBtn.text = "Logout"
+        }
 
         //設定按下按鈕後會觸發的動作
         returnBtn.setOnClickListener{
@@ -38,14 +48,30 @@ class SecActivity : AppCompatActivity() {
         }
 
         loginBtn.setOnClickListener {
-            val intentToLogin = Intent(this, LoginList::class.java)
-            startActivityForResult(intentToLogin, 112401003)
+            if(loggedInUser.getName() != ""){
+                AlertDialog.Builder(loginBtn.context)
+                    .setTitle("Logout")
+                    .setMessage("Do you really want to logout?")
+                    .setNegativeButton("Yes"){dialog, which ->
+                        loggedInUser.LogOut()
+                        this.recreate()
+                    }
+                    .setNeutralButton("No"){dialog, which -> }
+                    .show()
+            }
+            else{
+                val intentToLogin = Intent(this, LoginList::class.java)
+                startActivityForResult(intentToLogin, 112401003)
+            }
         }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val userInfo = findViewById<TextView>(R.id.userInfo)
+
+        //--------判定回傳的request code--------
         if(requestCode == 112401002){
             userInfo.text = //requestCode傳回來時,顯示user資訊的物件根據resultCode的不同來顯示不同資訊
                 if(resultCode == RESULT_OK){
@@ -59,16 +85,16 @@ class SecActivity : AppCompatActivity() {
                 }
         }
         else if(requestCode == 112401003){
-            userInfo.text =
-                if(resultCode == RESULT_OK){
-                    "Welcome back, " + data?.getStringExtra("user_Name")
-                }
-                else if(resultCode == RESULT_CANCELED){
-                    "Login canceled"
-                }
-                else{
-                    "ERROR"
-                }
+            if(resultCode == RESULT_OK){
+                userInfo.text = "Welcome back, " + loggedInUser.getName()
+                loginBtn.text = "Logout"
+            }
+            else if(resultCode == RESULT_CANCELED){
+                userInfo.text = "Login canceled"
+            }
+            else{
+                userInfo.text = "ERROR"
+            }
         }
     }
 }
