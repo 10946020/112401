@@ -10,7 +10,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="112401 test"
+        android:text="門禁App"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Press the button to show what time it is."
+        android:text="偵測最後一次進出入的時間"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -83,5 +83,14 @@
         app:layout_constraintEnd_toEndOf="@+id/launchBtn"
         app:layout_constraintStart_toStartOf="@+id/launchBtn"
         app:layout_constraintTop_toBottomOf="@+id/launchBtn" />
+
+    <TextView
+        android:id="@+id/show_userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/returnValue" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

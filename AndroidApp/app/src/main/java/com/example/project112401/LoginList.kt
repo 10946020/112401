@@ -23,12 +23,6 @@ class LoginList : AppCompatActivity() {
 
         count = findViewById(R.id.data)
         userList = findViewById(R.id.added_userList)  //RecyclerView, 用來顯示Adapter抓來的每筆資料
-        userData.add(NewAddedUser("ItsZir", "10946020@ntub.edu.tw", "1234567890"))
-
-        //測試用的假資料
-        userName = arrayOf("a","b","c")
-        userEmail = arrayOf("a@123","b@456","c@789")
-        userPassword = arrayOf("a","b","c")
 
         //這邊預定要開發的功能 : 讀取Database的所有使用者
         getData()
@@ -62,9 +56,9 @@ class LoginList : AppCompatActivity() {
     }
 
     private fun getData(){  //輸入假資料
-        for(i in userName.indices){
-            val dataset = NewAddedUser(userName[i], userEmail[i], userPassword[i])
-            userData.add(dataset)
+        val all_userList = GlobalVariables.User_Data().list  //全域變數的user data list
+        for(user in all_userList){
+            userData.add(user)
         }
         //刷新頁面
         userList.adapter = Adapter(userData)  //調用Adapter.kt的class

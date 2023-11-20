@@ -34,6 +34,15 @@ class GlobalVariables {  //存放全域變數
             user_password = ""
         }
     }
+
+    class User_Data{
+        val list = mutableListOf(
+            NewAddedUser("ItsZir","10946020@ntub.edu.tw", "114514"),
+            NewAddedUser("user1", "user1@ntub.edu.tw", "000001"),
+            NewAddedUser("user2", "user2@ntub.edu.tw", "000002"),
+            NewAddedUser("user3", "user3@ntub.edu.tw", "000003"),
+        )
+    }
 }
 
-val loggedInUser = GlobalVariables.Logged_In_Users()
+val loggedInUser = GlobalVariables.Logged_In_Users()  //已登入的使用者
