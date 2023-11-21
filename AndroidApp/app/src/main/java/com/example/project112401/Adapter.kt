@@ -42,6 +42,7 @@ class Adapter(private val newUserList : ArrayList<NewAddedUser>) : RecyclerView.
                     loggedInUser.setName(holder.userName.text.toString())
                         //.setEmail(holder.userEmail.text.toString())
                         //.setPassword(holder.userName.text.toString())
+                    loggedInUser.setStatusToLogin()
                 }
                 .setNeutralButton("No"){dialog, which -> }
                 .show()
@@ -53,6 +54,7 @@ class Adapter(private val newUserList : ArrayList<NewAddedUser>) : RecyclerView.
                 .setMessage("Do you really want to delete this user?")
                 .setNegativeButton("Yes"){dialog, which ->
                     newUserList.removeAt(position)
+                    //刪除Users裡的資料
                     this.notifyDataSetChanged()
                 }
                 .setNeutralButton("No"){dialog, which -> }

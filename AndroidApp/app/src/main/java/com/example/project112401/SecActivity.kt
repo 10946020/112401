@@ -28,6 +28,7 @@ class SecActivity : AppCompatActivity() {
         loginBtn =  findViewById(R.id.button_login)  //登入用的button
 
         val joinBtn =  findViewById<Button>(R.id.button_joinTheRoom)  //加入房間用的button
+        val reg_log_status = findViewById<TextView>(R.id.reg_log_status)  //顯示登入或註冊的狀態
 
         val userInfo = findViewById<TextView>(R.id.userInfo)
         if(loggedInUser.getName() != ""){  //如果有任何人登入, 則顯示目前使用者的名字
@@ -69,19 +70,19 @@ class SecActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val userInfo = findViewById<TextView>(R.id.userInfo)
-
+        val reg_log_status = findViewById<TextView>(R.id.reg_log_status)  //顯示登入或註冊的狀態
         //--------判定回傳的request code--------
         if(requestCode == 112401002){
-            userInfo.text = //requestCode傳回來時,顯示user資訊的物件根據resultCode的不同來顯示不同資訊
-                if(resultCode == RESULT_OK){
-                    "Welcome, " + data?.getStringExtra("user_Name")
-                }
-                else if(resultCode == RESULT_CANCELED){
-                    "Register canceled"
-                }
-                else{
-                    "ERROR"
-                }
+            //requestCode傳回來時,顯示user資訊的物件根據resultCode的不同來顯示不同資訊
+            if(resultCode == RESULT_OK){
+                //userInfo.text = "Welcome, " + data?.getStringExtra("user_Name")
+            }
+            else if(resultCode == RESULT_CANCELED){
+                reg_log_status.text = "Register canceled"
+            }
+            else{
+                reg_log_status.text = "ERROR"
+            }
         }
         else if(requestCode == 112401003){
             if(resultCode == RESULT_OK){
@@ -89,10 +90,10 @@ class SecActivity : AppCompatActivity() {
                 loginBtn.text = "Logout"
             }
             else if(resultCode == RESULT_CANCELED){
-                userInfo.text = "Login canceled"
+                reg_log_status.text = "Login canceled"
             }
             else{
-                userInfo.text = "ERROR"
+                reg_log_status.text = "ERROR"
             }
         }
     }

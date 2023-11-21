@@ -56,8 +56,7 @@ class LoginList : AppCompatActivity() {
     }
 
     private fun getData(){  //輸入假資料
-        val all_userList = GlobalVariables.User_Data().list  //全域變數的user data list
-        for(user in all_userList){
+        for(user in Users.list){  //全域變數的user data list
             userData.add(user)
         }
         //刷新頁面
