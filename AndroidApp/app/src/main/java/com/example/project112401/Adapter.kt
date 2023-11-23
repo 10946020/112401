@@ -40,9 +40,10 @@ class Adapter(private val newUserList : ArrayList<NewAddedUser>) : RecyclerView.
                     //傳送該使用者的名稱回SecActivity
                     //設定成為已登入的user, loggedInUser為global variable
                     loggedInUser.setName(holder.userName.text.toString())
-                        //.setEmail(holder.userEmail.text.toString())
-                        //.setPassword(holder.userName.text.toString())
+                    loggedInUser.setEmail(holder.userEmail.text.toString())
+                    loggedInUser.setPassword(holder.userName.text.toString())
                     loggedInUser.setStatusToLogin()
+                    //預計開發功能 : 自動跳轉回主畫面
                 }
                 .setNeutralButton("No"){dialog, which -> }
                 .show()
@@ -54,7 +55,9 @@ class Adapter(private val newUserList : ArrayList<NewAddedUser>) : RecyclerView.
                 .setMessage("Do you really want to delete this user?")
                 .setNegativeButton("Yes"){dialog, which ->
                     newUserList.removeAt(position)
-                    //刪除Users裡的資料
+                    //刪除Users裡的資料(即使用者物件)
+                    //Users.removeUser(position, holder.userName.text.toString())
+                    Users.list.removeAt(position)
                     this.notifyDataSetChanged()
                 }
                 .setNeutralButton("No"){dialog, which -> }

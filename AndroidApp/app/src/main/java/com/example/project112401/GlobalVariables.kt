@@ -55,7 +55,9 @@ class GlobalVariables {  //存放全域變數
     }
 
     class User_Data{
-        val list = mutableListOf(
+        val list : MutableList<NewAddedUser> = mutableListOf()  //儲存user資料的list
+
+        val tempData = mutableListOf(
             //以下為假資料, 之後這裡要連線至database
             NewAddedUser("ItsZir","10946020@ntub.edu.tw", "114514"),
             NewAddedUser("user1", "user1@ntub.edu.tw", "000001"),
@@ -67,10 +69,10 @@ class GlobalVariables {  //存放全域變數
             list.add(NewAddedUser(n,e,pw))
         }
 
-        fun removeUser(n: String, e: String, pw: String){
+        fun removeUser(index : Int,n: String){
             for(user in list){
-                if(user.name == n && user.email == e && user.password == pw){
-                    list.remove(user)
+                if(user.name == n && list.indexOf(user) == index){
+                    list.removeAt(index)
                 }
             }
         }
