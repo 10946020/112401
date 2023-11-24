@@ -39,6 +39,7 @@ class SecActivity : AppCompatActivity() {
         //設定按下按鈕後會觸發的動作
         returnBtn.setOnClickListener{
             intent2.putExtra("LastTime_fromSec", testTextView.text)  //設定傳送回去的資料
+            intent2.putExtra("CurrentUser", loggedInUser.getName())
             setResult(RESULT_OK,intent2)  //回傳表示執行成功的結果
             finish()
         }
@@ -49,7 +50,7 @@ class SecActivity : AppCompatActivity() {
         }
 
         loginBtn.setOnClickListener {
-            if(loggedInUser.getName() != ""){
+            if(loggedInUser.getName() != "" && loggedInUser.checkStatus()){
                 AlertDialog.Builder(loginBtn.context)
                     .setTitle("Logout")
                     .setMessage("Do you really want to logout?")
@@ -75,7 +76,7 @@ class SecActivity : AppCompatActivity() {
         if(requestCode == 112401002){
             //requestCode傳回來時,顯示user資訊的物件根據resultCode的不同來顯示不同資訊
             if(resultCode == RESULT_OK){
-                //userInfo.text = "Welcome, " + data?.getStringExtra("user_Name")
+                reg_log_status.text = "Register succeeded"
             }
             else if(resultCode == RESULT_CANCELED){
                 reg_log_status.text = "Register canceled"
@@ -90,7 +91,9 @@ class SecActivity : AppCompatActivity() {
                 loginBtn.text = "Logout"
             }
             else if(resultCode == RESULT_CANCELED){
-                reg_log_status.text = "Login canceled"
+                if(!loggedInUser.checkStatus()){
+                    reg_log_status.text = "Login canceled"
+                }
             }
             else{
                 reg_log_status.text = "ERROR"

@@ -21,13 +21,6 @@ class MainActivity : AppCompatActivity() {
         val time = findViewById<TextView>(R.id.daytime)  //這個TextView用來顯示 : 發生偵測動作當下的時間
         val calculator = findViewById<TextView>(R.id.last_check)  //這個TextView用來顯示 : 兩次偵測之間的時間差
         val launchBtn = findViewById<Button>(R.id.launchBtn)  //切換介面用的按鈕物件
-        val refreshBtn = findViewById<Button>(R.id.refreshBtn)  //手動整理介面的按鈕
-
-        refreshBtn.setOnClickListener {
-            if(loggedInUser.checkStatus() == true){
-                this.recreate()
-            }
-        }
 
         val userName = findViewById<TextView>(R.id.show_userName)  //顯示已經登入的user
         userName.text = "尚未登入"
@@ -58,10 +51,8 @@ class MainActivity : AppCompatActivity() {
             return result
         }
 
-        if(loggedInUser.getName() != "" && loggedInUser.checkStatus() == true){
-            userName.text = "User : " + loggedInUser.getName()
-
-            button1.setOnClickListener {  //當按下按鈕後發生的事, 以後是自動辨識到身分後就進行裡面的動作
+        button1.setOnClickListener {  //當按下按鈕後發生的事, 以後是自動辨識到身分後就進行裡面的動作
+            if(loggedInUser.getName() != "" && loggedInUser.checkStatus()){  //如果有user登入
                 val now = System.currentTimeMillis()  //發生偵測動作當下的時間, 資料型態為long
                 val timestamp = Timestamp(now)  //轉成時間戳
                 val tf = SimpleDateFormat("yyyy/MM/dd EEE HH:mm:ss a")  //更改時間戳的顯示格式
@@ -94,6 +85,15 @@ class MainActivity : AppCompatActivity() {
                 //變數設定為跳轉頁面時保存的時間, 變數後加上?表示可以為空值, 加上!!則表示絕不是空值並繼續執行
                 lastTime = data?.getStringExtra("LastTime_fromSec")!!.toLong()
                 v.text = lastTime.toString()  //顯示保存的時間
+
+                val userName = findViewById<TextView>(R.id.show_userName)  //顯示已經登入的user
+                if(loggedInUser.checkStatus()){
+                    userName.text = "User : " + loggedInUser.getName()
+                }
+                else if(!loggedInUser.checkStatus()){
+                    userName.text = "尚未登入"
+                    this.recreate()
+                }
             }
         }
     }

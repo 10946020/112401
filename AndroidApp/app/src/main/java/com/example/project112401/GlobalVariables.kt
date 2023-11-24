@@ -55,14 +55,19 @@ class GlobalVariables {  //存放全域變數
     }
 
     class User_Data{
-        val list : MutableList<NewAddedUser> = mutableListOf()  //儲存user資料的list
+        val list : MutableList<NewAddedUser> = mutableListOf(  //儲存user資料的list
+            NewAddedUser("ItsZir","10946020@ntub.edu.tw", "114514"),
+            NewAddedUser("user1", "user1@ntub.edu.tw", "000001"),
+            NewAddedUser("user2", "user2@ntub.edu.tw", "000002"),
+            NewAddedUser("user3", "user3@ntub.edu.tw", "000003")
+        )
 
         val tempData = mutableListOf(
             //以下為假資料, 之後這裡要連線至database
             NewAddedUser("ItsZir","10946020@ntub.edu.tw", "114514"),
             NewAddedUser("user1", "user1@ntub.edu.tw", "000001"),
             NewAddedUser("user2", "user2@ntub.edu.tw", "000002"),
-            NewAddedUser("user3", "user3@ntub.edu.tw", "000003"),
+            NewAddedUser("user3", "user3@ntub.edu.tw", "000003")
         )
 
         fun addUserData(n : String, e: String, pw: String){

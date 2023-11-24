@@ -25,10 +25,6 @@ class LoginList : AppCompatActivity() {
         userList = findViewById(R.id.added_userList)  //RecyclerView, 用來顯示Adapter抓來的每筆資料
 
         //這邊預定要開發的功能 : 讀取Database的所有使用者
-        for(fakeUser in Users.tempData){
-            Users.list.add(fakeUser)  //導入假資料
-        }
-
         getData()
 
         //userList.setHasFixedSize(true)
@@ -55,7 +51,7 @@ class LoginList : AppCompatActivity() {
 
         registerBtn.setOnClickListener {
             val intentToRegister = Intent(this, AppUserRegister::class.java)
-            startActivityForResult(intentToRegister, 112401004)
+            startActivityForResult(intentToRegister, 112401002)
         }
     }
 
@@ -70,8 +66,8 @@ class LoginList : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 112401004){
-
+        if(requestCode == 112401002){
+            this.recreate()
         }
     }
 }

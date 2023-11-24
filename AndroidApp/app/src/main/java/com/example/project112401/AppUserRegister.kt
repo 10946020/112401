@@ -62,7 +62,8 @@ class AppUserRegister : AppCompatActivity() {
                 val ue = userEmail.text.toString()
                 val upw = userPassword.text.toString()
                 Users.addUserData(un, ue, upw)
-                intentBackToSec.putExtra("user_Name", userName.text.toString())
+
+                //intentBackToSec.putExtra("user_Name", userName.text.toString())
                 setResult(RESULT_OK, intentBackToSec)
                 finish()
             }
