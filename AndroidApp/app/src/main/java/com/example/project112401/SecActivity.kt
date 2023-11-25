@@ -78,7 +78,9 @@ class SecActivity : AppCompatActivity() {
                     .show()
             }
             else{
-                val intentToRoom = Intent(this, RoomStatus::class.java)
+                val intentToRoom = Intent(this, RoomStatus::class.java).apply {
+                    this.putExtra("CurrentUser", loggedInUser.getName())  //傳送當前登入的user的名稱至房間介面, 以達成頁面自動刷新
+                }
                 startActivityForResult(intentToRoom, 112401004)
             }
         }
