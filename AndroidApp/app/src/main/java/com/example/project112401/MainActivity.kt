@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         button1.setOnClickListener {  //當按下按鈕後發生的事, 以後是自動辨識到身分後就進行裡面的動作
             if(loggedInUser.getName() != "" && loggedInUser.checkStatus()){  //如果有user登入
-                val now = System.currentTimeMillis()  //發生偵測動作當下的時間, 資料型態為long
+                val now = enterTime.getTime()  //發生偵測動作當下的時間, 資料型態為long
                 val timestamp = Timestamp(now)  //轉成時間戳
                 val tf = SimpleDateFormat("yyyy/MM/dd EEE HH:mm:ss a")  //更改時間戳的顯示格式
                 time.text = tf.format(timestamp)  //把顯示用的物件的text改成格式化後的當下時間
@@ -83,8 +83,8 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == 112401001){  //回傳的code號碼
             if (resultCode == RESULT_OK){  //狀態為回傳成功的話
                 //變數設定為跳轉頁面時保存的時間, 變數後加上?表示可以為空值, 加上!!則表示絕不是空值並繼續執行
-                lastTime = data?.getStringExtra("LastTime_fromSec")!!.toLong()
-                v.text = lastTime.toString()  //顯示保存的時間
+                //lastTime = data?.getStringExtra("LastTime_fromSec")!!.toLong()
+                //v.text = lastTime.toString()  //顯示保存的時間
 
                 val userName = findViewById<TextView>(R.id.show_userName)  //顯示已經登入的user
                 if(loggedInUser.checkStatus()){

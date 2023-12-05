@@ -38,7 +38,7 @@ class LoginList : AppCompatActivity() {
         backBtn.setOnClickListener {
             //判斷全域變數class中已登入的user名稱是否為空
             if(loggedInUser.getName() != ""){
-                val toast = Toast.makeText(this, "Logged in as " + loggedInUser.getName(), Toast.LENGTH_SHORT)
+                val toast = Toast.makeText(this, "以用戶身分 ${loggedInUser.getName()} 登入成功", Toast.LENGTH_SHORT)
                     toast.show()
                 setResult(RESULT_OK)
                 finish()

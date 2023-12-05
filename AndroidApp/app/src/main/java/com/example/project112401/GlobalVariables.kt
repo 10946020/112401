@@ -1,6 +1,17 @@
 package com.example.project112401
 
 class GlobalVariables {  //存放全域變數
+    class EnterTime{
+        var recentTime : Long = 0
+
+        fun refreshRecentTime(){
+            recentTime = System.currentTimeMillis()
+        }
+        fun getTime() : Long{
+            refreshRecentTime()
+            return recentTime
+        }
+    }
     class Logged_In_Users{  //已登入的user, 以及其attributes, methods
         //基本帳號資訊
         private var user_name : String = ""
@@ -8,7 +19,7 @@ class GlobalVariables {  //存放全域變數
         private var user_password : String = ""
 
         //整理成自訂的data class格式, 方便調用
-        private var format = NewAddedUser(user_name, user_email, user_password)
+        private var format = NewAddedUser(user_name, user_email, user_password, null)
 
         private var isLoggedIn : Boolean = false  //是否已登入
 
@@ -82,22 +93,22 @@ class GlobalVariables {  //存放全域變數
 
     class User_Data{
         val list : MutableList<NewAddedUser> = mutableListOf(  //儲存user資料的list
-            NewAddedUser("ItsZir","10946020@ntub.edu.tw", "114514"),
-            NewAddedUser("user1", "user1@ntub.edu.tw", "000001"),
-            NewAddedUser("user2", "user2@ntub.edu.tw", "000002"),
-            NewAddedUser("user3", "user3@ntub.edu.tw", "000003")
+            NewAddedUser("ItsZir","10946020@ntub.edu.tw", "114514", null),
+            NewAddedUser("user1", "user1@ntub.edu.tw", "000001", null),
+            NewAddedUser("user2", "user2@ntub.edu.tw", "000002", null),
+            NewAddedUser("user3", "user3@ntub.edu.tw", "000003", null)
         )
 
         val tempData = mutableListOf(
             //以下為假資料, 之後這裡要連線至database
-            NewAddedUser("ItsZir","10946020@ntub.edu.tw", "114514"),
-            NewAddedUser("user1", "user1@ntub.edu.tw", "000001"),
-            NewAddedUser("user2", "user2@ntub.edu.tw", "000002"),
-            NewAddedUser("user3", "user3@ntub.edu.tw", "000003")
+            NewAddedUser("ItsZir","10946020@ntub.edu.tw", "114514", null),
+            NewAddedUser("user1", "user1@ntub.edu.tw", "000001", null),
+            NewAddedUser("user2", "user2@ntub.edu.tw", "000002", null),
+            NewAddedUser("user3", "user3@ntub.edu.tw", "000003", null)
         )
 
         fun addUserData(n : String, e: String, pw: String){
-            list.add(NewAddedUser(n,e,pw))
+            list.add(NewAddedUser(n,e,pw, null))
         }
 
         fun removeUser(index : Int,n: String){
@@ -109,9 +120,16 @@ class GlobalVariables {  //存放全域變數
         }
     }
 
-    class Room_Numbers{  //表示房間假資料的class
+    class Room_Info{  //表示房間假資料的class
         private val rooms : MutableList<RoomProperties> = mutableListOf(  //儲存假資料
-            RoomProperties(114514, "Room_1", "114514", mutableListOf())
+            RoomProperties(
+                112401,
+                "",
+                "114514",
+                null,
+                mutableListOf(),
+                0
+            )
         )
 
         //用房間的編號跟名稱來鎖定要找的房間物件, 方便調用
@@ -136,8 +154,9 @@ class GlobalVariables {  //存放全域變數
             rooms.remove(room)
         }
 
-        fun joinTheUser(room : RoomProperties, user: NewAddedUser){
+        fun joinTheUser(room : RoomProperties, user: NewAddedUser){  //新增使用者進去房間
             room.usersInThere.add(user)
+            room.usersCount += 1
         }
     }
 }
@@ -146,4 +165,6 @@ val loggedInUser = GlobalVariables.Logged_In_Users()  //宣告一個物件, 作�
 
 val Users = GlobalVariables.User_Data()  //模擬資料庫裡所有的user
 
-val roomData = GlobalVariables.Room_Numbers()  //模擬資料庫裡所有已存在的房間
+val roomData = GlobalVariables.Room_Info()  //模擬資料庫裡所有已存在的房間
+
+val enterTime = GlobalVariables.EnterTime()  //當前辨識進出時的時間

@@ -34,8 +34,8 @@ class Adapter(private val newUserList : ArrayList<NewAddedUser>) : RecyclerView.
 
         holder.icon.setOnClickListener{
             AlertDialog.Builder(holder.icon.context)
-                .setTitle("Login")
-                .setMessage("Login as this user?")
+                .setTitle("登入")
+                .setMessage("要用這個身分登入嗎?")
                 .setNegativeButton("Yes"){dialog, which ->
                     //傳送該使用者的名稱回SecActivity
                     //設定成為已登入的user, loggedInUser為global variable
@@ -51,8 +51,8 @@ class Adapter(private val newUserList : ArrayList<NewAddedUser>) : RecyclerView.
 
         holder.deleteBtn.setOnClickListener{
             AlertDialog.Builder(holder.deleteBtn.context)
-                .setTitle("Delete the user")
-                .setMessage("Do you really want to delete this user?")
+                .setTitle("刪除使用者")
+                .setMessage("確定要刪除這位使用者嗎?")
                 .setNegativeButton("Yes"){dialog, which ->
                     newUserList.removeAt(position)
                     //刪除Users裡的資料(即使用者物件)
