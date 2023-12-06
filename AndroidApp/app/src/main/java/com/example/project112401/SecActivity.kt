@@ -68,7 +68,7 @@ class SecActivity : AppCompatActivity() {
                     .show()
             }
             else{
-                val intentToLogin = Intent(this, LoginList::class.java)
+                val intentToLogin = Intent(this, LoginVerify::class.java)
                 startActivityForResult(intentToLogin, 112401003)
             }
         }
