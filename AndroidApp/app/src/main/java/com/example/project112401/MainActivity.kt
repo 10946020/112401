@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     //判別回傳的requestCode
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val v = findViewById<TextView>(R.id.returnValue)  //用來顯示上次保存的時間的物件
+        //val v = findViewById<TextView>(R.id.returnValue)  //用來顯示上次保存的時間的物件
         if (requestCode == 112401001){  //回傳的code號碼
             if (resultCode == RESULT_OK){  //狀態為回傳成功的話
                 //變數設定為跳轉頁面時保存的時間, 變數後加上?表示可以為空值, 加上!!則表示絕不是空值並繼續執行

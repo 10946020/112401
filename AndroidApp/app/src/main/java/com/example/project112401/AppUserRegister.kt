@@ -36,25 +36,29 @@ class AppUserRegister : AppCompatActivity() {
         registerBtn.setOnClickListener {
             //檢查輸入資訊是否正確及適當
             if(userName.text.toString() == ""){
-                warningMessage.text = "Please Enter your name!"
+                warningMessage.text = "請輸入您的使用者名稱!"
             }
             else if(userEmail.text.toString() == ""){
-                warningMessage.text = "Please Enter your E-mail!"
+                warningMessage.text = "請填寫您的E-mail!"
             }
             else if(userPassword.text.toString() == ""){
-                warningMessage.text = "Please Enter your Password!"
+                warningMessage.text = "請設定密碼!"
             }
             else if(checkPassword.text.toString() == ""){
-                warningMessage.text = "Please Enter your Password again!"
+                warningMessage.text = "請重複輸入一次您的密碼!"
+            }
+            //每一欄必要資訊都有填寫的話, 開始檢查輸入的資料是否適當
+            else if(userName.text.toString().length > 30){
+                warningMessage.text = "您的使用者名稱太長了"
             }
             else if(userPassword.text.toString() != checkPassword.text.toString()){
-                warningMessage.text = "Please Enter the same password twice!"
+                warningMessage.text = "兩次輸入的密碼不相同!"
             }
             else if(userPassword.text.toString().length < 6){
-                warningMessage.text = "Your password was too short!"
+                warningMessage.text = "您的密碼太短了!"
             }
             else if(userPassword.text.toString().length > 16){
-                warningMessage.text = "Your password was too long!"
+                warningMessage.text = "您的密碼太長了!"
             }
             else{
                 //這邊預定要開發的功能 : 送出使用者的資料到Database
