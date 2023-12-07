@@ -1,7 +1,9 @@
 package com.example.project112401
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract.Intents
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
@@ -29,6 +31,13 @@ class RoomStatus : AppCompatActivity() {
 
         joinBtn.setOnClickListener {
             //如果找到存在房間,則加到user所屬的房間列表, 同時該房間裡的user列表也新增該用戶進去
+        }
+
+        createBtn.setOnClickListener {   //建立新房間
+            //手動設定房間名稱, 密碼, 硬體編號(硬體ID不可重複)
+            //自動生成唯一的房間ID
+            val intentToCreateTheRoom = Intent(this, CreateTheRoom::class.java)
+            startActivity(intentToCreateTheRoom)
         }
 
         //顯示房間資訊跟出入紀錄等, 紀錄用adapter弄

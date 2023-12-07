@@ -77,16 +77,16 @@ class GlobalVariables {  //存放全域變數
         }
 
         //------所屬房間------------------
-        fun joinToTheRoom(num: Int, name : String){  //使用者加入房間
-            val room = roomData.theRoom(num, name)
-            if(roomData.isTheRoomExist(num, name)){
-                roomList.add(room)
+        fun userJoinToTheRoom(num: Int, password : String){  //使用者加入房間
+            if(!roomData.theRoom(num, password).isNullOrEmpty()){  //如果有找到該房間
+                val room = roomData.theRoom(num, password)[0]  //用編號跟密碼找到房間的物件
+                roomList.add(room)  //把該房間加到使用者已經待著的房間列表
             }
         }
-        fun leaveTheRoom(num: Int, name : String){  //使用者離開該房間
-            val room = roomData.theRoom(num, name)
-            if(roomList.contains(room)){
-                roomList.remove(room)
+        fun userLeaveTheRoom(num: Int, password : String){  //使用者離開該房間
+            if(!roomData.theRoom(num, password).isNullOrEmpty()){  //如果有找到該房間
+                val room = roomData.theRoom(num, password)[0]  //用編號跟密碼找到房間的物件
+                roomList.remove(room)  //把該房間從使用者已經待著的房間列表內移除
             }
         }
     }
@@ -132,12 +132,15 @@ class GlobalVariables {  //存放全域變數
             )
         )
 
-        //用房間的編號跟名稱來鎖定要找的房間物件, 方便調用
-        fun theRoom(num: Int) : RoomProperties{  //此function回傳的是物件(找到的房間)
-            return rooms.filter { (roomNum) -> roomNum == num}[0]
+        //用房間的編號跟密碼來鎖定要找的房間物件, 方便調用
+
+        //此function回傳的是物件(找到的房間)
+        fun theRoom(num: Int) : RoomProperties{  //只用房間編號找
+            return rooms.filter { it.roomNumber == num}[0]
         }
-        fun theRoom(num : Int, name : String) : RoomProperties{  //此function回傳的是物件(找到的房間)
-            return rooms.filter { (roomNum, roomName) -> roomNum == num && roomName == name }[0]
+        //此function回傳的是物件List(找到的房間)
+        fun theRoom(num : Int, password : String) : List<RoomProperties>{  //用房間編號跟密碼找
+            return rooms.filter { it.roomNumber == num && it.roomPW == password }
         }
 
         //------Methods
@@ -145,16 +148,34 @@ class GlobalVariables {  //存放全域變數
             val room = rooms.filter { (roomNum, roomName) -> roomNum == num && roomName == name }[0]  //只檢查房間的id跟名稱
             return rooms.contains(room)  //filter選出的data type為ArrayList, 所以要選擇其index為0(即第一個)的data
         }
-        private fun createTheRoom(num : Int, name : String){  //創建新房間
-            val room = rooms.filter { (roomNum, roomName) -> roomNum == num && roomName == name }[0]
-            rooms.add(room)
+        private fun createTheRoom(name : String, password : String, deviceID : Int){  //創建新房間
+            if(loggedInUser.checkStatus()){  //只有登入使用者後才能操作
+                //生成新的房間物件
+                val newRoom = RoomProperties(
+                    0,  //要用隨機生成的數字作為ID
+                    name,  //使用者輸入的房間名稱
+                    password,  //使用者輸入的房間密碼
+                    deviceID,  //使用者輸入的要綁定的設備ID
+                    mutableListOf(),  //預設一個空List來存放使用者
+                    0  //房間內的使用者數量
+                )
+
+                //將當前的使用者加進新房間的user List裡
+                roomJoinTheUser(newRoom, loggedInUser.getDataFormat())
+
+                //使用者個人已加入的房間List也要新增這個新房間進去
+                loggedInUser.userJoinToTheRoom(newRoom.roomNumber, newRoom.roomPW)
+
+                //之後再把新房間物件加到代表所有房間列表的List
+                rooms.add(newRoom)
+            }
         }
         private fun deleteTheRoom(num : Int, name : String){  //刪除房間
             val room = rooms.filter { (roomNum, roomName) -> roomNum == num && roomName == name }[0]
             rooms.remove(room)
         }
 
-        fun joinTheUser(room : RoomProperties, user: NewAddedUser){  //新增使用者進去房間
+        private fun roomJoinTheUser(room : RoomProperties, user: NewAddedUser){  //新增使用者進去房間
             room.usersInThere.add(user)
             room.usersCount += 1
         }
