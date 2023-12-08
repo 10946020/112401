@@ -41,10 +41,7 @@ class LoginVerify : AppCompatActivity() {
             else{  //帳號密碼都正確
                 val verifyingUser = findTheUser(userEnteredEmail, userEnteredPassword)[0]  //找到使用者物件
                 //設定成為已登入的user, loggedInUser為global variable
-                loggedInUser.setName(verifyingUser.name)
-                loggedInUser.setEmail(verifyingUser.email)
-                loggedInUser.setPassword(verifyingUser.password)
-                loggedInUser.setStatusToLogin()
+                loggedInUser.logIn(verifyingUser)
 
                 //顯示彈出訊息
                 val toast = Toast.makeText(this, "以用戶身分 ${loggedInUser.getName()} 登入成功", Toast.LENGTH_SHORT)

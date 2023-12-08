@@ -3,11 +3,8 @@ package com.example.project112401
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract.Intents
-import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 
 class RoomStatus : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +15,9 @@ class RoomStatus : AppCompatActivity() {
         userName.text = "User : " + intent.getStringExtra("CurrentUser")  //從SecActivity傳送過來的user名稱
 
         val roomUserHave = findViewById<TextView>(R.id.room_userHave)  //顯示該使用者目前進入了多少房間
-        roomUserHave.text = "您目前正在 ${loggedInUser.roomList.size} 個房間裡"
+        roomUserHave.text = "您目前正在 ${loggedInUser.getRoomCount()} 個房間裡"
+
+        //val roomCount = findViewById<TextView>(R.id.room_roomCount)
 
         val createBtn = findViewById<Button>(R.id.room_create_btn)  //創建新房間
         val joinBtn = findViewById<Button>(R.id.room_join_btn)  //加入房間
@@ -37,9 +36,24 @@ class RoomStatus : AppCompatActivity() {
             //手動設定房間名稱, 密碼, 硬體編號(硬體ID不可重複)
             //自動生成唯一的房間ID
             val intentToCreateTheRoom = Intent(this, CreateTheRoom::class.java)
-            startActivity(intentToCreateTheRoom)
+            startActivityForResult(intentToCreateTheRoom, 112401005)
         }
 
         //顯示房間資訊跟出入紀錄等, 紀錄用adapter弄
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        //--------判定回傳的request code--------
+        if(requestCode == 112401005){
+            val roomCount = findViewById<TextView>(R.id.room_roomCount)
+            roomCount.text = "目前有${roomData.rooms.size}個房間"
+
+            if(resultCode == RESULT_OK){
+                val roomUserHave = findViewById<TextView>(R.id.room_userHave)  //顯示該使用者目前進入了多少房間
+                roomUserHave.text = "您目前正在 ${loggedInUser.getRoomCount()} 個房間裡"
+            }
+        }
     }
 }

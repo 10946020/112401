@@ -53,6 +53,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/room_userName" />
 
+    <TextView
+        android:id="@+id/room_roomCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/room_join_btn"
+        app:layout_constraintStart_toStartOf="@+id/room_join_btn"
+        app:layout_constraintTop_toBottomOf="@+id/room_join_btn" />
+
     <Button
         android:id="@+id/room_join_btn"
         android:layout_width="wrap_content"
