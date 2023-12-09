@@ -193,15 +193,14 @@ class GlobalVariables {  //存放全域變數
 
         //用房間的編號跟密碼來鎖定要找的房間物件, 方便調用
         //此function回傳的是物件List(找到的房間)
-        fun theRoom(num : Int, password : String) : List<RoomProperties>{  //用房間編號跟密碼找
-            return rooms.filter { it.roomNumber == num && it.roomPW == password }
+        fun theRoom(roomID : Int) : MutableList<RoomProperties>{
+            return rooms.filter { it.roomNumber == roomID }.toMutableList()
+        }
+        fun theRoom(num : Int, password : String) : MutableList<RoomProperties>{  //用房間編號跟密碼找
+            return rooms.filter { it.roomNumber == num && it.roomPW == password }.toMutableList()
         }
 
         //------Methods
-        fun isTheRoomExist(num : Int, name : String) : Boolean {  //尋找房間是否已存在
-            val room = rooms.filter { (roomNum, roomName) -> roomNum == num && roomName == name }[0]  //只檢查房間的id跟名稱
-            return rooms.contains(room)  //filter選出的data type為ArrayList, 所以要選擇其index為0(即第一個)的data
-        }
         fun createTheRoom(name : String, password : String, deviceID : Int){  //創建新房間
             if(loggedInUser.checkStatus()){  //只有登入使用者後才能操作
                 //生成新的房間物件
@@ -234,7 +233,7 @@ class GlobalVariables {  //存放全域變數
             rooms.remove(room)
         }
 
-        private fun roomJoinTheUser(room : RoomProperties, user: NewAddedUser){  //新增使用者進去房間
+        fun roomJoinTheUser(room : RoomProperties, user: NewAddedUser){  //新增使用者進去房間
             room.usersInThere.add(user)
             room.usersCount += 1
         }
