@@ -7,21 +7,11 @@
     android:background="#D3000000"
     tools:context=".RoomInformation">
 
-    <Button
-        android:id="@+id/roomInfo_backBtn"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#2196F3"
-        android:text="返回"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <FrameLayout
         android:id="@+id/roomInfo_frameLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/roomInfo_navigator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -33,10 +23,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:backgroundTint="#D3000000"
+        app:itemActiveIndicatorStyle="@android:color/transparent"
         app:itemIconTint="@drawable/nav_icon_tint_color_selector"
         app:itemTextColor="@drawable/nav_icon_tint_color_selector"
         app:labelVisibilityMode="labeled"
-        app:itemActiveIndicatorStyle="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -44,5 +34,16 @@
         app:menu="@menu/room_nav">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <Button
+        android:id="@+id/roomInfo_backBtn"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#2196F3"
+        android:text="返回"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
