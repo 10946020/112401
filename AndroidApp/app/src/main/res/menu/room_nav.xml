@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/roomNavBtn_info"
+        android:icon="@drawable/baseline_info_24"
+        android:title="房間資訊" />
+    <item
+        android:id="@+id/roomNavBtn_userList"
+        android:icon="@drawable/baseline_people_24"
+        android:title="用戶列表" />
+    <item
+        android:id="@+id/roomNavBtn_ioRecords"
+        android:icon="@drawable/baseline_sensor_door_24"
+        android:title="進出紀錄" />
+    <item
+        android:id="@+id/roomNavBtn_setting"
+        android:icon="@drawable/baseline_settings_24"
+        android:title="設定" />
+</menu>

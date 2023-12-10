@@ -43,7 +43,11 @@ class RoomStatus : AppCompatActivity() {
             startActivityForResult(intentToCreateTheRoom, 112401005)
         }
 
-        //顯示房間資訊跟出入紀錄等, 紀錄用adapter弄
+        checkRoomsBtn.setOnClickListener {
+            //顯示房間資訊跟出入紀錄等, 紀錄用adapter弄
+            val intentToCheckRooms = Intent(this, RoomInformation::class.java)
+            startActivityForResult(intentToCheckRooms, 12401007)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -59,7 +63,10 @@ class RoomStatus : AppCompatActivity() {
         if(requestCode == 112401005){  //創建房間的動作
 
         }
-        else if(requestCode == 112401006){
+        else if(requestCode == 112401006){  //加入房間
+
+        }
+        else if(requestCode == 112401007){  //查看房間
 
         }
     }
