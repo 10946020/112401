@@ -20,6 +20,7 @@ class RoomStatus : AppCompatActivity() {
         val roomCount = findViewById<TextView>(R.id.room_roomCount)
         roomCount.text = "目前有${roomData.rooms.size}個房間"
 
+        val warningMsg = findViewById<TextView>(R.id.room_warning)  //警示訊息
         val checkRoomsBtn = findViewById<Button>(R.id.room_checkMyRooms)  //檢視用戶已加入的房間
         val createBtn = findViewById<Button>(R.id.room_create_btn)  //創建新房間
         val joinBtn = findViewById<Button>(R.id.room_join_btn)  //加入房間
@@ -44,9 +45,14 @@ class RoomStatus : AppCompatActivity() {
         }
 
         checkRoomsBtn.setOnClickListener {
-            //顯示房間資訊跟出入紀錄等, 紀錄用adapter弄
-            val intentToCheckRooms = Intent(this, RoomInformation::class.java)
-            startActivityForResult(intentToCheckRooms, 12401007)
+            if(loggedInUser.getRoomCount() <= 0){
+                warningMsg.text = "請先加入房間才能查看房間內的資訊!"
+            }
+            else{
+                //顯示房間資訊跟出入紀錄等, 紀錄用adapter弄
+                val intentToCheckRooms = Intent(this, RoomInformation::class.java)
+                startActivityForResult(intentToCheckRooms, 12401007)
+            }
         }
     }
 
