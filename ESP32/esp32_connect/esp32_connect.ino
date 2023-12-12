@@ -1,4 +1,8 @@
 #include <WiFi.h>
+#include <HTTPClient.h>
+
+#define DeviceID 112401
+String deviceName = "專題用辨識工具";
 
 #define RXp2 16  //灰色線, ESP32板上的RX2(GIOP16), 接到Arduino板子上的1號
 #define TXp2 17  //白色線, ESP32板上的TX2(GIOP17), 接到Arduino板子上的0號
@@ -67,6 +71,41 @@ void loop() {
     ledStatus = true;
     Show_Wifi_Status();
   }
-  Serial.println(Serial2.readString());  //這裡的Serial顯示從Serial2讀取到的訊息
-  delay(1000);  //設定每幾ms檢查一次從RX跟TX傳來的訊息
+
+  //這裡的Serial顯示從Serial2讀取到的訊息
+  while(Serial2.available() > 0){
+    int userID = Serial2.readString().toInt();  //從Arduino UNO傳來的使用者ID, 再把字串換成int
+    Serial.println(userID);
+    if(userID == -1){
+      Serial.println("This person isn't found.");
+    }
+    else if(userID <= 0 || userID > 127){
+      Serial.println("Error.");
+    }
+    else{
+      String serverRoute = "http://140.131.114.158/Project/Open_Device_Information_Add_Save.asp?UserID=";
+      String toWebServer = serverRoute + userID + "&DeviceID=" + DeviceID;
+      connect(toWebServer);
+      Serial.println("Connected to the server from User " + String(userID));
+    }
+    delay(100);  //設定每幾ms檢查一次從RX跟TX傳來的訊息
+  }
+}
+
+void connect(String ipAddress){  //對網址發起get請求的function
+  HTTPClient http;  //定義新的http物件
+  http.begin(ipAddress);  //準備使用參數填的網址
+  int httpCode = http.GET();  //發出GET request
+  if(httpCode > 0){  //如果無異常
+    if(httpCode == HTTP_CODE_OK){
+      //String payload = http.getString();  //查看網頁資訊
+      //Serial.println(payload);  //看情況使用, 不然會跑一堆網頁資訊
+      Serial.println("GET succeeded.");  //成功
+    }
+  }
+  else{
+    Serial.printf("GET failed, error : %s\n", http.errorToString(httpCode).c_str());  //GET失敗就傳送錯誤訊息
+  }
+  http.end();  //結束動作
+  delay(50);
 }

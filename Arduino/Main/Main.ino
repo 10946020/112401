@@ -36,18 +36,18 @@ void setup(){ //開始時執行一次, 主要為偵測
   Serial.begin(9600); //IDE視窗初始化
   while (!Serial);
   delay(100);
-  Serial.println("\n\nAdafruit finger detect test");
+  //Serial.println("\n\nAdafruit finger detect test");
   // set the data rate for the sensor serial port
   finger.begin(57600);
   if (finger.verifyPassword()) {
-    Serial.println("Found fingerprint sensor!");
+    //Serial.println("Found fingerprint sensor!");
   } else {
-    Serial.println("Did not find fingerprint sensor :(");
+    //Serial.println("Did not find fingerprint sensor :(");
     while (1) { delay(1); }
   }
   finger.getTemplateCount();
   //顯示目前儲存了幾個指紋樣本
-  Serial.print("Sensor contains "); Serial.print(finger.templateCount); Serial.println(" templates"); 
+  //Serial.print("Sensor contains "); Serial.print(finger.templateCount); Serial.println(" templates"); 
 
   enrollMode = deleteMode = leaveTheMode = false;
   isUserFound = isUserNOTFound = isError = false;
@@ -55,8 +55,8 @@ void setup(){ //開始時執行一次, 主要為偵測
   //---Keypad---
   pwDigit = 0; //
   userEnter = ""; //清空使用者輸入的密碼
-  Serial.println("I'm ready.");
-  Serial.println("Waiting for valid finger or to enter the password...");
+  //Serial.println("I'm ready.");
+  //Serial.println("Waiting for valid finger or to enter the password...");
 
   //---LCD---
   //SDA接A4; SCL接A5
@@ -127,9 +127,9 @@ void loop(){ //重複執行的動作
 
     //接收到指紋, 不管有沒有成功
     if(isUserFound || isUserNOTFound || (finger_status != 2)){  //偵測到指紋辨識後等getFingerprintID()動作完, 重置狀態
-      Serial.println(finger_status);
+      //Serial.println(finger_status);
       if(isError == true){  //報錯則顯示訊息
-        Serial.println("Oops, error happened.");
+        //Serial.println("Oops, error happened.");
         isError = false;
       }
 
@@ -142,7 +142,7 @@ void loop(){ //重複執行的動作
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Waiting...");
-      Serial.print("Please enter the password or fingerprint : ");
+      //Serial.print("Please enter the password or fingerprint : ");
     }
     else{
       //按下按鈕時
@@ -234,41 +234,41 @@ uint8_t getFingerprintID() {
   uint8_t p = finger.getImage();
   switch (p) {
     case FINGERPRINT_OK:
-      Serial.println("\nImage taken");
+      //Serial.println("\nImage taken");
       break;
     case FINGERPRINT_NOFINGER:
       //Serial.println("No finger detected");
       return p;
     case FINGERPRINT_PACKETRECIEVEERR:
-      Serial.println("Communication error");
+      //Serial.println("Communication error");
       return p;
     case FINGERPRINT_IMAGEFAIL:
-      Serial.println("Imaging error");
+      //Serial.println("Imaging error");
       return p;
     default:
-      Serial.println("Unknown error");
+      //Serial.println("Unknown error");
       return p;
   }// OK success!
 
   p = finger.image2Tz();
   switch (p) {
     case FINGERPRINT_OK:
-      Serial.println("Image converted");
+      //Serial.println("Image converted");
       break;
     case FINGERPRINT_IMAGEMESS:
-      Serial.println("Image too messy");
+      //Serial.println("Image too messy");
       return p;
     case FINGERPRINT_PACKETRECIEVEERR:
-      Serial.println("Communication error");
+      //Serial.println("Communication error");
       return p;
     case FINGERPRINT_FEATUREFAIL:
-      Serial.println("Could not find fingerprint features");
+      //Serial.println("Could not find fingerprint features");
       return p;
     case FINGERPRINT_INVALIDIMAGE:
-      Serial.println("Could not find fingerprint features");
+      //Serial.println("Could not find fingerprint features");
       return p;
     default:
-      Serial.println("Unknown error");
+      //Serial.println("Unknown error");
       return p;
   }// OK converted!
 
@@ -277,8 +277,8 @@ uint8_t getFingerprintID() {
   if (p == FINGERPRINT_OK) {  //找到人
     isUserFound = true;
     
-    Serial.print("Welcome back, User ");
-    Serial.println(finger.fingerID);
+    //Serial.print("Welcome back, User ");
+    Serial.println(String(finger.fingerID));  //只傳送使用者ID
     
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -287,12 +287,13 @@ uint8_t getFingerprintID() {
     lcd.print("!");
   }
   else if (p == FINGERPRINT_PACKETRECIEVEERR) {
-    Serial.println("Communication error");
+    //Serial.println("Communication error");
     return p;
   }
   else if (p == FINGERPRINT_NOTFOUND) {  //沒找到
     isUserNOTFound = true;
-    Serial.println("Did not find a match");
+    //Serial.println("Did not find a match");
+    Serial.println("-1");
 
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -303,13 +304,13 @@ uint8_t getFingerprintID() {
   }
   else {
     isError = true;
-    Serial.println("Unknown error");
+    //Serial.println("Unknown error");
     return p;
   }
 
   if(!isError && isUserFound){  //沒有報錯就顯示詳細訊息
-    Serial.print("Found ID #"); Serial.print(finger.fingerID);
-    Serial.print(" with confidence of "); Serial.println(finger.confidence);
+    //Serial.print("Found ID #"); Serial.print(finger.fingerID);
+    //Serial.print(" with confidence of "); Serial.println(finger.confidence);
   }
 
   return finger.fingerID;
