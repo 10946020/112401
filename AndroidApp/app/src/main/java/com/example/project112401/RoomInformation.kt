@@ -4,6 +4,7 @@ import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -12,6 +13,8 @@ class RoomInformation : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_information)
 
+        val infoText = findViewById<TextView>(R.id.roomInfo_dataText)
+
         val navigator = findViewById<BottomNavigationView>(R.id.roomInfo_navigator)
         val backBtn = findViewById<Button>(R.id.roomInfo_backBtn)
 
@@ -19,21 +22,34 @@ class RoomInformation : AppCompatActivity() {
             finish()
         }
 
+        infoText.text = "房間名稱 : ${loggedInUser.getUserRoom()[0].roomName}"
         replaceFragment(RoomFragment_Info())  //預設先切換到顯示Info的Fragment
 
         navigator.setOnItemSelectedListener {  //底部按鈕選擇後的反應
             when(it.itemId){
                 //預計優化方向 : 把登入的user跟房間相關data直接從這個activity導入, 再分別送到其他fragments
                 R.id.roomNavBtn_info ->{  //第一個 : Info
+                    infoText.text = "房間名稱 : ${loggedInUser.getUserRoom()[0].roomName}"
                     replaceFragment(RoomFragment_Info())
                 }
-                R.id.roomNavBtn_userList -> replaceFragment(RoomFragment_UserList())
-                R.id.roomNavBtn_ioRecords -> replaceFragment(RoomFragment_ioRecord())
-                R.id.roomNavBtn_setting -> replaceFragment(RoomFragment_Setting())
+                R.id.roomNavBtn_userList ->{
+                    infoText.text = "用戶數量 : ${loggedInUser.getUserRoom()[0].usersCount}, Owner : ${loggedInUser.getUserRoom()[0].usersInThere[0].name}"
+                    replaceFragment(RoomFragment_UserList())
+                }
+                R.id.roomNavBtn_ioRecords ->{
+                    infoText.text = "目前綁定設備 : ${loggedInUser.getUserRoom()[0].deviceID}"
+                    replaceFragment(RoomFragment_ioRecord())
+                }
+                R.id.roomNavBtn_setting ->{
+                    infoText.text = "Setting"
+                    replaceFragment(RoomFragment_Setting())
+                }
 
                 else -> { true }
 
                 /*
+                //待開發用的傳遞訊息方式跟語法
+
                 R.id.roomNavBtn_info ->{  //第一個 : Info
                     val fragment = RoomFragment_Info()
                     val bundle = Bundle()

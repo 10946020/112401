@@ -47,9 +47,6 @@ class GlobalVariables {  //存放全域變數
             //該user目前已加入的房間, 房間的資料格式為RoomProperties.kt中的data class
         )
 
-        //整理成自訂的data class格式, 方便調用
-        private var format = NewAddedUser(user_name, user_email, user_password, null, roomList)
-
         private var isLoggedIn : Boolean = false  //是否已登入
 
         //基本變數的設定跟呼叫方法
@@ -125,7 +122,13 @@ class GlobalVariables {  //存放全域變數
 
         //------調用data class格式------------------
         fun getDataFormat() : NewAddedUser{
-            return format
+            return NewAddedUser(
+                user_name,
+                user_email,
+                user_password,
+                user_ID,
+                roomList
+            )
         }
 
         //------所屬房間------------------
@@ -238,8 +241,24 @@ class GlobalVariables {  //存放全域變數
         }
 
         fun roomJoinTheUser(room : RoomProperties, user: NewAddedUser){  //新增使用者進去房間
-            room.usersInThere.add(user)
+            val newEnteredUser = NewAddedUser(
+                user.name,
+                user.email,
+                user.password,
+                user.id,
+                user.room
+            )
+
+            room.usersInThere.add(newEnteredUser)
             room.usersCount += 1
+        }
+
+        public fun RoomGetUserName(room : RoomProperties, index : Int) : String{
+            return room.usersInThere[index].name
+        }
+
+        public fun RoomGetUserEmail(room : RoomProperties, index : Int) : String{
+            return room.usersInThere[index].email
         }
     }
 

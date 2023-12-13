@@ -8,18 +8,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 class RoomFragment_Info : Fragment() {
-    private lateinit var roomName : TextView  //
+    //private lateinit var roomName : TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_room__info, container, false)
-        roomName = view.findViewById(R.id.roomInfoFrag_name)
+        //roomName = view.findViewById(R.id.roomInfoFrag_name)
 
         //val data = this.arguments?.getString("string").toString()
         //roomName.text = data
 
-        roomName.text = loggedInUser.getUserRoom()[0].roomName
+        //roomName.text = loggedInUser.getUserRoom()[0].roomName
         return view
     }
 }

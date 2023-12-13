@@ -9,13 +9,13 @@ import android.widget.TextView
 import kotlin.math.log
 
 class RoomFragment_ioRecord : Fragment() {
-    private lateinit var roomRecord : TextView
+    //private lateinit var roomRecord : TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_room_io_record, container, false)
-        roomRecord = view.findViewById(R.id.roomInfoFrag_record)
+        //roomRecord = view.findViewById(R.id.roomInfoFrag_record)
         //val data = arguments
         //roomRecord.text = data!!.get("string").toString()
         /*
@@ -32,7 +32,7 @@ class RoomFragment_ioRecord : Fragment() {
         //另類寫法 :
         //roomRecord.text = room_device_ID?.toString() ?: "錯誤,此房間並未綁定設備!"
 
-        roomRecord.text = "目前綁定設備 : ${loggedInUser.getUserRoom()[0].deviceID}"
+        //roomRecord.text = "目前綁定設備 : ${loggedInUser.getUserRoom()[0].deviceID}"
 
         return view
     }
