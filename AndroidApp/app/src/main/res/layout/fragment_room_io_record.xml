@@ -3,5 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".RoomFragment_ioRecord"/>
+    android:background="#9A9A9A"
+    tools:context=".RoomFragment_ioRecord">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/roomIORecord_recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+</FrameLayout>

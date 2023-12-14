@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class RoomFragment_UserList : Fragment() {
-    //private lateinit var roomUserList : TextView
     private lateinit var userListView : RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

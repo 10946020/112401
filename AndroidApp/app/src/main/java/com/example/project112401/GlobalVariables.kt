@@ -154,19 +154,11 @@ class GlobalVariables {  //存放全域變數
 
     class User_Data{
         val list : MutableList<NewAddedUser> = mutableListOf(  //儲存user資料的list
-            NewAddedUser("ItsZir","10946020@ntub.edu.tw", "114514", 1, mutableListOf()),
+            NewAddedUser("ItsZir","10946020@ntub.edu.tw", "112401", 1, mutableListOf()),
             NewAddedUser("user1", "user1@ntub.edu.tw", "000001", null, mutableListOf()),
             NewAddedUser("user2", "user2@ntub.edu.tw", "000002", null, mutableListOf()),
             NewAddedUser("user3", "user3@ntub.edu.tw", "000003", null, mutableListOf()),
             NewAddedUser("test", "test", "0", 0, mutableListOf())
-        )
-
-        val tempData = mutableListOf(
-            //以下為假資料, 之後這裡要連線至database
-            NewAddedUser("ItsZir","10946020@ntub.edu.tw", "114514", null, mutableListOf()),
-            NewAddedUser("user1", "user1@ntub.edu.tw", "000001", null, mutableListOf()),
-            NewAddedUser("user2", "user2@ntub.edu.tw", "000002", null, mutableListOf()),
-            NewAddedUser("user3", "user3@ntub.edu.tw", "000003", null, mutableListOf())
         )
 
         fun addUserData(n : String, e: String, pw: String){
@@ -191,7 +183,7 @@ class GlobalVariables {  //存放全域變數
             RoomProperties(
                 112401,
                 "testRoom",
-                "114514",
+                "112401",
                 null,  //devices.findTheDevice(112401)[0].deviceID,  //儲存綁定的設備的ID
                 mutableListOf(),
                 0
@@ -267,7 +259,7 @@ class GlobalVariables {  //存放全域變數
         val deviceList : MutableList<DevicesProperties> = mutableListOf(
             DevicesProperties(
                 112401,
-                "112401門禁裝置",
+                "專題用辨識工具",
                 null  //roomData.theRoom(112401)[0]  //設備綁定的房間
             )
         )
