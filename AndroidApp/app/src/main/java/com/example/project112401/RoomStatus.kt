@@ -18,7 +18,7 @@ class RoomStatus : AppCompatActivity() {
         roomUserHave.text = "您目前正在 ${loggedInUser.getRoomCount()} 個房間裡"
 
         val roomCount = findViewById<TextView>(R.id.room_roomCount)
-        roomCount.text = "目前有${roomData.rooms.size}個房間"
+        roomCount.text = ""
 
         val warningMsg = findViewById<TextView>(R.id.room_warning)  //警示訊息
         val checkRoomsBtn = findViewById<Button>(R.id.room_checkMyRooms)  //檢視用戶已加入的房間
@@ -60,17 +60,16 @@ class RoomStatus : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         val roomCount = findViewById<TextView>(R.id.room_roomCount)
-        roomCount.text = "目前有${roomData.rooms.size}個房間"
 
         val roomUserHave = findViewById<TextView>(R.id.room_userHave)  //顯示該使用者目前進入了多少房間
         roomUserHave.text = "您目前正在 ${loggedInUser.getRoomCount()} 個房間裡"
 
         //--------判定回傳的request code--------
         if(requestCode == 112401005){  //創建房間的動作
-
+            roomUserHave.text = "您目前正在 ${loggedInUser.getRoomCount()} 個房間裡"
         }
         else if(requestCode == 112401006){  //加入房間
-
+            roomUserHave.text = "您目前正在 ${loggedInUser.getRoomCount()} 個房間裡"
         }
         else if(requestCode == 112401007){  //查看房間
 

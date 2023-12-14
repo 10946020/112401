@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/returnBtn1"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="24dp"
@@ -45,15 +45,15 @@
 
     <Button
         android:id="@+id/button_joinTheRoom"
-        android:layout_width="wrap_content"
+        android:layout_width="362dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginBottom="80dp"
         android:backgroundTint="#00BCD4"
         android:text="房間資訊"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/button_login"
-        app:layout_constraintStart_toStartOf="@+id/button_login"
-        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_login"
@@ -76,7 +76,7 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#000000"
         android:textSize="28sp"
-        android:textStyle="bold|italic"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/imageView"

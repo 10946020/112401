@@ -54,13 +54,14 @@ class RoomFragment_ioRecord : Fragment() {
                 for(column in row.select("td")) {  //檢查該tr裡每個td標籤內的資料
                     rowData.add(column.text())  //資料新增到list
                 }
+                //抓完每一行的資料後判斷資料是否符合需求再儲存
                 if(rowData[3] == loggedInUser.getUserRoom()[0].deviceID.toString()){  //如果進出紀錄裡的deviceID跟該房間的設備ID符合
                     resultLists.add(rowData)  //最後再把list存到所有結果的list
                 }
             }
             recordInThisRoom = resultLists  //資料轉移到另一個裝list的list, 提供之後更多資料處理功能使用
 
-            withContext(Dispatchers.Main){  //切換回主執行續進行套用Adapter等其他動作
+            withContext(Dispatchers.Main){  //切換回主執行緒進行套用Adapter等其他動作
                 IORecordView.adapter = RoomIORecordAdapter(recordInThisRoom)  //套用Adapter到recyclerView
             }
 

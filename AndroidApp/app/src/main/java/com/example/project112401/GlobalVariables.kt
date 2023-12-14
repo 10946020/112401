@@ -153,12 +153,8 @@ class GlobalVariables {  //存放全域變數
     }
 
     class User_Data{
-        val list : MutableList<NewAddedUser> = mutableListOf(  //儲存user資料的list
-            NewAddedUser("ItsZir","10946020@ntub.edu.tw", "112401", 1, mutableListOf()),
-            NewAddedUser("user1", "user1@ntub.edu.tw", "000001", null, mutableListOf()),
-            NewAddedUser("user2", "user2@ntub.edu.tw", "000002", null, mutableListOf()),
-            NewAddedUser("user3", "user3@ntub.edu.tw", "000003", null, mutableListOf()),
-            NewAddedUser("test", "test", "0", 0, mutableListOf())
+        var list : MutableList<NewAddedUser> = mutableListOf(  //儲存user資料的list
+            //已連上database中的user data
         )
 
         fun addUserData(n : String, e: String, pw: String){
@@ -180,6 +176,7 @@ class GlobalVariables {  //存放全域變數
 
     class Room_Info{  //表示房間假資料的class
         val rooms : MutableList<RoomProperties> = mutableListOf(  //儲存假資料
+            /*
             RoomProperties(
                 112401,
                 "testRoom",
@@ -188,6 +185,7 @@ class GlobalVariables {  //存放全域變數
                 mutableListOf(),
                 0
             )
+             */
         )
 
         //用房間的編號跟密碼來鎖定要找的房間物件, 方便調用
@@ -200,11 +198,11 @@ class GlobalVariables {  //存放全域變數
         }
 
         //------Methods
-        fun createTheRoom(name : String, password : String, deviceID : Int){  //創建新房間
+        fun createTheRoom(id: Int, name : String, password : String, deviceID : Int){  //創建新房間
             if(loggedInUser.checkStatus()){  //只有登入使用者後才能操作
                 //生成新的房間物件
                 val newRoom = RoomProperties(
-                    111111,  //要用隨機生成的數字作為ID
+                    id,  //要用隨機生成的數字作為ID
                     name,  //使用者輸入的房間名稱
                     password,  //使用者輸入的房間密碼
                     deviceID,  //使用者輸入的要綁定的設備ID
@@ -257,11 +255,7 @@ class GlobalVariables {  //存放全域變數
     class Devices{
         //用data class的格式成立的設備list
         val deviceList : MutableList<DevicesProperties> = mutableListOf(
-            DevicesProperties(
-                112401,
-                "專題用辨識工具",
-                null  //roomData.theRoom(112401)[0]  //設備綁定的房間
-            )
+            //已連上db的device資料
         )
 
         //用id來找設備, 回傳list型態的資料, 如果檢查ID出來是已綁定的或不存在的設備則回傳空list
