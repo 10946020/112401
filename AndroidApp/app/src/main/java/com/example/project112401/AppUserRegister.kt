@@ -7,6 +7,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.jsoup.Jsoup
 
 class AppUserRegister : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -61,12 +66,22 @@ class AppUserRegister : AppCompatActivity() {
                 warningMessage.text = "您的密碼太長了!"
             }
             else{
-                //這邊預定要開發的功能 : 送出使用者的資料到Database
                 val un = userName.text.toString()
                 val ue = userEmail.text.toString()
                 val upw = userPassword.text.toString()
-                Users.addUserData(un, ue, upw)
 
+                val urlToRegister = "http://140.131.114.158/project/User_Information_Add_Save.asp"
+                GlobalScope.launch(Dispatchers.IO){
+                    Jsoup.connect(urlToRegister)
+                        .data("UserMail", ue)
+                        .data("UserName", un)
+                        .data("UserPassword", upw)
+                        .data("UserNickname", (10..127).random().toString())  //隨機給ID
+                        .execute()
+                    withContext(Dispatchers.Main){
+                        Users.addUserData(un, ue, upw)
+                    }
+                }
                 //intentBackToSec.putExtra("user_Name", userName.text.toString())
                 setResult(RESULT_OK, intentBackToSec)
                 finish()
